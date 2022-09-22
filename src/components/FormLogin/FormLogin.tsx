@@ -1,12 +1,13 @@
 import React from 'react'
-import loginSideImg from '../../assets/img/loginImg.svg'
+import userLogo from '../../assets/img/user.svg'
+//import loginSideImg from '../../assets/img/loginImg.svg'
 const FornLogin = () => {
   return (
-    <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
-    <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
-        <h1 className="text-3xl font-semibold text-center text-purple-700 uppercase">
-            Sign in
-        </h1>
+    <div className="relative flex flex-row  justify-center min-h-screen overflow-hidden">
+    <div className="w-full  p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
+    <div className='flex item-center justify-center'>
+    <img src={userLogo} alt="" className='h-32'/>
+    </div>
         <form className="mt-6">
             <div className="mb-2">
                 <label className="block text-sm font-semibold text-gray-800">Email</label>
@@ -30,9 +31,7 @@ const FornLogin = () => {
             </div>
         </form>
     </div>
-    <div>
-    <img src={loginSideImg} alt="" className='"relative flex flex-col justify-center min-h-screen overflow-hidden"'/>
-    </div>
+    
 </div>
   )
 }
