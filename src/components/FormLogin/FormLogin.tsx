@@ -1,9 +1,9 @@
 import React from 'react'
 import userLogo from '../../assets/img/user.svg'
-//import loginSideImg from '../../assets/img/loginImg.svg'
+import loginSideImg from '../../assets/img/loginImg.svg'
 const FornLogin = () => {
   return (
-    <div className="relative flex flex-row  justify-center min-h-screen overflow-hidden">
+    <div className="relative flex px-5 justify-center items-center min-h-screen overflow-hidden">
     <div className="w-full  p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
     <div className='flex item-center justify-center'>
     <img src={userLogo} alt="" className='h-32'/>
@@ -30,8 +30,11 @@ const FornLogin = () => {
                 </button>
             </div>
         </form>
+  
     </div>
-    
+    <div>
+        <img src={loginSideImg} alt="" />
+    </div>
 </div>
   )
 }
