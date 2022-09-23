@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import userLogo from '../../assets/img/user.svg';
-
+interface IData{ email:string, password:string }
 const FormLogin = () => {
 
-    const [data, setData] = useState({ email: '', password: '' })
+    const [data, setData] = useState<IData>({ email: '', password: '' })
     const navigation = useNavigate();
-    const handlerSubmit = async (e) => {
+    const handlerSubmit = async (e:FormEvent):Promise<void> => {
         e.preventDefault()
         const login = await axios.post('https://reqres.in/api/login', data)
         const { data: { token }, status } = login
-        if (status === 200) {
+        if (status === 200 ) {
             console.log(status)
             localStorage.setItem('token', token);
             navigation('/home')
-        } else {
-        }
-         
+        } 
+        
     };
 
   return (

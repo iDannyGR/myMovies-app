@@ -7,26 +7,30 @@ import {
 import './assets/sass/global.scss'
 import Login from './pages/Login'
 import { NotFound } from 'components/404'
-import Home from 'pages/Home';
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import Search from './components/NavbarSearch/Search/Search'
 //import { MovieDetail } from 'components/MovieDetail'
+import { NavBar } from 'components/NavbarSearch';
+import MovieInfo from './pages/MovieInfo';
 
 const App = ()=> {
   return (
     <div className="App">
        <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/*" element={<div>
+            <NavBar /> <Routes>
+              <Route path='home' element={<MovieInfo/> } />
+              </Routes>
+              </div>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
     </BrowserRouter>
-      {/* <NavBar />
-      <Search/>
-      <MovieInfo /> */}
-      
-      
+      <ToastContainer />
     </div>
   );
 }

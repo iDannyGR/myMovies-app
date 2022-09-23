@@ -1,6 +1,17 @@
-import React from 'react'
-
+import React, { useEffect } from 'react'
+import { api } from 'api/base.api';
 const MovieInfo = () => {
+//const [movies, setMovies] = useState({});
+    
+
+  useEffect(() => {
+    const getMovies = async () => {
+      const  allMovies  = await api.get("trending/movie/day");
+      //setMovies({ movies, data });
+      console.log(allMovies)
+    }
+          getMovies();
+  });
 
   return (
 <a href="#" className="flex flex-col m-20 items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-black-700 dark:bg-white-800 dark:hover:bg-white-700">
