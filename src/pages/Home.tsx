@@ -1,23 +1,26 @@
-import React from 'react'
-import { MovieInfo } from 'components/MovieInfo'
-import { NavBar }  from 'components/NavbarSearch'
-//import { useNavigate } from "react-router-dom";
-import { movies } from '../api/movieDB';
+import React, { useState } from 'react';
+import { MovieInfo } from 'components/MovieInfo';
+import { NavBar } from 'components/NavbarSearch';
+import { api } from 'api/base.api';
 
 const Home = () => {
-    React.useEffect(() => {
-        movies.getAll({ page: 1 }).then((r) => {
-            const movs = r.data.results
-            console.table(movs)
-        })
-    });
+    const [movies, setmovies] = useState({});
+    const getMovies = async () => {
+        const { data } = await api.get("trending/movie/day");
+        setmovies({ movies, data });
+        console.log(data);
+    };
+    getMovies();
   return (
       <>
-          <div>  <NavBar /></div>
+          <div>
+             <NavBar /> 
+          </div>
           <section>
               <MovieInfo />
-          </section> 
-      </>
+          </section>
+         
+    </>
   )
 }
 

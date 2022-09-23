@@ -2,19 +2,23 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import userLogo from '../../assets/img/user.svg';
+
 const FormLogin = () => {
+
     const [data, setData] = useState({ email: '', password: '' })
     const navigation = useNavigate();
-     const handlerSubmit = async (e) => { 
+    const handlerSubmit = async (e) => {
         e.preventDefault()
-         const login = await axios.post('https://reqres.in/api/login', data )
-         const { data: { token }, status } = login
-         if (status === 200 && token) { 
-             localStorage.setItem('token', token)
-             navigation('/home')
-         }
+        const login = await axios.post('https://reqres.in/api/login', data)
+        const { data: { token }, status } = login
+        if (status === 200) {
+            console.log(status)
+            localStorage.setItem('token', token);
+            navigation('/home')
+        } else {
+        }
          
-    }
+    };
 
   return (
     <div className="relative flex px-5 justify-center items-center min-h-screen overflow-hidden">
@@ -49,9 +53,10 @@ const FormLogin = () => {
             <a href="#" className="text-xs text-purple-600 hover:underline">Forget Password?</a>
             <div className="mt-6">
                 <button type='submit' className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
-                    Login
+                          Login
                 </button>
-            </div>
+                  </div>
+                  
         </form>
   
     </div>
