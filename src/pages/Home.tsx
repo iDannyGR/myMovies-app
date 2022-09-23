@@ -7,7 +7,8 @@ import { movies } from '../api/movieDB';
 const Home = () => {
     React.useEffect(() => {
         movies.getAll({ page: 1 }).then((r) => {
-            console.log(r.data.results)
+            const movs = r.data.results
+            console.table(movs)
         })
     });
   return (

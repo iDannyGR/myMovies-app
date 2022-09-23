@@ -9,7 +9,7 @@ const FormLogin = () => {
         e.preventDefault()
          const login = await axios.post('https://reqres.in/api/login', data )
          const { data: { token }, status } = login
-         if (status === 200) { 
+         if (status === 200 && token) { 
              localStorage.setItem('token', token)
              navigation('/home')
          }
