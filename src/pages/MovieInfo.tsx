@@ -1,16 +1,54 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { api } from 'api/base.api';
+interface  MovieResult {
+  poster_path?: string
+  adult?: boolean
+  overview?: string
+  release_date?: string
+  genre_ids?: Array<number>
+  id?: number
+  media_type: 'movie'
+  original_title?: string
+  original_language?: string
+  title?: string
+  backdrop_path?: string
+  popularity?: number
+  vote_count?: number
+  video?: boolean
+  vote_average?: number
+}
+
 const MovieInfo = () => {
-//const [movies, setMovies] = useState({});
-    
+//
+  const [movies, setMovies] = useState<MovieResult>({
+  poster_path: '',
+  adult: false ,
+  overview:'' ,
+  release_date:'' ,
+  genre_ids:[] ,
+  id:'' ,
+  media_type: '',
+  original_title:'' ,
+  original_language: '',
+  title: '',
+  backdrop_path: '',
+  popularity: '',
+  vote_count:'' ,
+  video: '',
+  vote_average: 0 });  
 
   useEffect(() => {
+ 
     const getMovies = async () => {
       const  allMovies  = await api.get("trending/movie/day");
       //setMovies({ movies, data });
-      console.log(allMovies)
+      if (allMovies.status === 200) { 
+          setMovies(allMovies.data)
+      }
+      
     }
-          getMovies();
+    getMovies();
+    console.log(movies)
   });
 
   return (
