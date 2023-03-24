@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const UrlApi = 'https://api.themoviedb.org/3/'
+export const UrlApi:string = 'https://api.themoviedb.org/3/'
 export const api = axios.create({
     baseURL: UrlApi,
     params: {

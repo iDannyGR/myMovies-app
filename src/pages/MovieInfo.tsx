@@ -1,30 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { api } from 'api/base.api';
 import { useGlobalContext } from '../hook/useGlobalContext';
-const IMG = 'https://image.tmdb.org/t/p/w300'
-interface Results {
-adult: boolean
-backdrop_path: string
-genre_ids: Array<number>
-id: number
-media_type: string
-original_language: string
-original_title: string
-overview: string
-popularity: number
-poster_path: string
-release_date : string
-title : string
-video : boolean
-vote_average : number
-vote_count : number
- }
-interface MovieResult {
-  page: number
-  results: Array<Results>
-  total_pages: number
-  total_results: number
-}
+import { MovieResult } from 'models/MovieResult';
+
+const IMG:string = 'https://image.tmdb.org/t/p/w300'
 
 const MovieInfo = () => {
   const [movies, setMovies] = useState<MovieResult>({
@@ -62,18 +41,26 @@ const MovieInfo = () => {
     console.log(searchMovie)
   }, [searchMovie])
 
-  return (<div className='grid grid-cols-3'>
+  return (
+  <div className="flex flex-col">
     {
       movies && movies.results.map((movie, index) =>  
-                <a href="#" key={index} className="flex flex-col  items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-black-700 dark:bg-white-800 dark:hover:bg-white-700">
-          <img className="object-cover w-full rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg" src={`${IMG}${movie.poster_path}`} alt={movie.title} />
-              <div className=" pl-4 pr-3 flex flex-col justify-between leading-normal">
-                  <h5 className=" text-2xl font-bold tracking-tight text-gray-900 dark:text-black">{movie.title}</h5>
-                  <p className="line-clamp-3 font-normal text-justify text-gray-700 dark:text-gray-400">{`${splitText(movie.overview) }...`}</p>
-                  <p className=' text-center text-xl text-red-900 mt-3'>Release Date: {movie.release_date }</p>
-            <p className=' text-center text-xl text-red-900'>Average Vote: { movie.vote_average}</p>
+        <div 
+          key={index} 
+          className="relative w-full h-[550px] rounded-3xl mb-4 shadow-lg border border-gray-400"
+          >
+          <img className="object-cover w-full h-full rounded-3xl" src={`${IMG}${movie.poster_path}`} alt={movie.title} />
+              <div className="">
+                  <p className="hidden text-2xl font-semibold">{movie.title}</p>
+                  <p className="hidden font-normal text-justify text-gray-700 md:line-clamp-3">{`${splitText(movie.overview) }...`}</p>
+                  <p className="hidden text-red-900 text-center md:text-xl  md:mt-3">Release Date: {movie.release_date }</p>
+                  <div className="absolute flex justify-center items-center rounded-full w-16 h-16 top-4 left-3 border">
+                    <p className='rounded-full flex justify-center items-center  bg-white w-12 h-12 text-black font-extrabold'>
+                      <span> { movie.vote_average.toFixed(1)} </span>
+                    </p>
+                  </div>
               </div>
-          </a>
+        </div>
       )
     }
   </div>
